@@ -1,0 +1,34 @@
+# Author: KARTIK SENGAR
+# SAP ID: 500083548
+# ROLL NO: R214220601
+# Batch: 5
+# Course: Container Orchestration and Infrastructure Automation
+# Program: B.TECH CSE, CC&VT
+
+
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: server
+    volumes:
+      - servervol:/serverdata
+    ports:
+      - '8081:8081'
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    container_name: client
+    volumes:
+      - clientvol:/clientdata
+    depends_on:
+      - server
+
+volumes:
+  servervol:
+  clientvol:
